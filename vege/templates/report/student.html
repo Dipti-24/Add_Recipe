@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block start %}
+
+    <div class="container mt-5">
+        
+        <form class="mb-5">
+               
+        <div class="row">
+            <div class ="col-md-6">
+                <input class="form-control" name="Search" placeholder="search">
+            </div>
+        <div class="col-md-6">
+            <button class="btn btn-success">Search</button>
+        </div>
+          </div>
+        </div>
+          
+          
+
+</form>
+<div class="container mt-5">
+<form method="POST" action = "ACTION_OR_VIEW_URL_ON_SUBMIT_HERE" >{% csrf_token %}
+    <label for="colorSelect">Filter</label>
+    <select type="text" id="colorSelect" name="colorSelect">
+        <option selected>Age</option>
+        <option>Name</option>
+        <option>id</option>
+    </select>
+    <br></br>
+    <input type="submit" value="Submit!"/></br></br>
+
+</form>
+</div>
+        <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">student_id</th>
+      <th scope="col">Department</th>
+      <th scope="col">student_name</th>
+      <th scope="col">student_age</th>
+      <th scope="col">student_email</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in queryset %}
+    
+    <tr>
+      <th scope="row">{{queryset.start_index|add:forloop.counter0 }}</th>
+      <td>
+        <a href="{% url 'see_marks' i.student_id %}" >
+        {{i.student_id}}
+    </a>
+      <td>{{i.department.department}}</td>
+      <td>{{i.student_name}}</td>
+      <td>{{i.student_age}}</td>
+      <td>{{i.student_email}}</td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table> 
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  
+        
+    </div>
+    {%endblock%}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block start %}
+
+<div class="container">
+  <h1>this is sent email</h1>
+  <a href="{% url 'send_email' %}" class="btn btn-success">SEND EMAIL</a>
+</div>
+    <!--{{peoples}}-->
+    
+    <table class="container mt-5">
+        <tr>
+          <th>S.No</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Can Vote</th>
+
+        </tr>
+        {% for i in peoples%}
+        <tr>
+          <td>{{forloop.counter}}</td>
+          <td>{{i.name}}</td>
+          <td>{{i.age}}</td>
+          <td {% if i.age <= 18 %} style='background:red' {% endif %}>
+            {% if i.age >= 18 %}
+            👍
+            {% else %}
+            👎
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p>
+        {% if "cucmber" in vegetable %}
+        Yes Available
+        {% else %}
+            Not Available
+    {% endif %}
+    </p>
+{%endblock%}
